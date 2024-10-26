@@ -6,10 +6,9 @@ import torch
 # Load Processor & VLA
 processor = AutoProcessor.from_pretrained("openvla/openvla-7b", trust_remote_code=True)
 vla = AutoModelForVision2Seq.from_pretrained(
-    "openvla/openvla-7b", 
-    attn_implementation="flash_attention_2",  # [Optional] Requires `flash_attn`
+    "openvla/openvla-7b",
+    attn_implementation="flash_attention_2", 
     torch_dtype=torch.bfloat16, 
-    low_cpu_mem_usage=True, 
     trust_remote_code=True
 ).to("cuda:0")
 
@@ -23,5 +22,5 @@ action = vla.predict_action(**inputs, unnorm_key="bridge_orig", do_sample=False)
 
 print(action)
 
-# # Execute...
-# robot.act(action, ...)
+import torch
+print(torch.version.cuda)
